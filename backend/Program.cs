@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicTacToe.Api.Data.Context;
+using TicTacToe.Api.Services;
+using TicTacToe.Api.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 // Configura o Entity Framework Core para usar o PostgreSQL
 builder.Services.AddDbContext<TicTacToeDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IMatchService, MatchService>();
 
 var app = builder.Build();
 
