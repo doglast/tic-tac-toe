@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Board from './components/Board';
 import { useGame } from './hooks/useGame';
 import api from './services/api';
+import Ranking from './components/Ranking';
 import { LOG_MESSAGES, ALERT_MESSAGES, STATUS_MESSAGES } from './constants/messages';
 
 // ==========================================
@@ -137,21 +138,25 @@ function App() {
       <Title>Tic Tac Toe</Title>
 
       {!gameStarted ? (
-        <SetupArea>
-          <input
-            type="text"
-            value={nameX}
-            onChange={(e) => setNameX(e.target.value)}
-            placeholder="Nome do Jogador X"
-          />
-          <input
-            type="text"
-            value={nameO}
-            onChange={(e) => setNameO(e.target.value)}
-            placeholder="Nome do Jogador O"
-          />
-          <Button onClick={handleStart}>Iniciar Partida</Button>
-        </SetupArea>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+          <SetupArea>
+            <input
+              type="text"
+              value={nameX}
+              onChange={(e) => setNameX(e.target.value)}
+              placeholder="Nome do Jogador X"
+            />
+            <input
+              type="text"
+              value={nameO}
+              onChange={(e) => setNameO(e.target.value)}
+              placeholder="Nome do Jogador O"
+            />
+            <Button onClick={handleStart}>Iniciar Batalha</Button>
+          </SetupArea>
+
+          <Ranking />
+        </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
           <Status>{getStatusMessage()}</Status>
