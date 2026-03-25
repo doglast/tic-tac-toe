@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../Const/TicTacToe.Const.csproj" Id="2401216a-f928-4446-85d4-55165d241b25" />
+  <Project Path="TicTacToe.Api.csproj" />
+</Solution>
