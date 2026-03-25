@@ -1,6 +1,4 @@
-﻿using TicTacToe.Api.Models.Entities;
-
-namespace TicTacToe.Domain.Entities
+﻿namespace TicTacToe.Api.Models.Entities
 {
     public class Player
     {

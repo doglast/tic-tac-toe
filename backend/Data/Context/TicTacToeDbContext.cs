@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicTacToe.Api.Models.Entities;
-using TicTacToe.Domain.Entities;
 
 namespace TicTacToe.Api.Data.Context
 {
