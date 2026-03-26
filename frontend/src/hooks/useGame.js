@@ -13,11 +13,10 @@ export const useGame = () => {
             [0, 3, 6], [1, 4, 7], [2, 5, 8],
             [0, 4, 8], [2, 4, 6]
         ];
-
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
             if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return squares[a]; // Retorna 'X' ou 'O'
+                return squares[a];
             }
         }
         return null;
@@ -27,38 +26,32 @@ export const useGame = () => {
     const isDraw = !winnerSymbol && !board.includes(null);
 
     let winnerName = null;
-    if (winnerSymbol === 'X') winnerName = playerX;
-    if (winnerSymbol === 'O') winnerName = playerO;
-    const handlePlay = (index) => {
-        if (board[index] || winnerSymbol) return;
+    if (winnerSymbol === 'X') winnerName = playerX || 'Jogador X';
+    if (winnerSymbol === 'O') winnerName = playerO || 'Jogador O';
 
-        const newBoard = [...board];
-        newBoard[index] = xIsNext ? 'X' : 'O';
-
-        setBoard(newBoard);
-        setXIsNext(!xIsNext);
+    const applyMove = (index, symbol) => {
+        setBoard((prevBoard) => {
+            const newBoard = [...prevBoard];
+            newBoard[index] = symbol;
+            return newBoard;
+        });
+        setXIsNext(symbol === 'X' ? false : true);
     };
 
     const resetBoard = () => {
         setBoard(Array(9).fill(null));
         setXIsNext(true);
     };
-    const startGame = (nameX, nameO) => {
-        setPlayerX(nameX);
-        setPlayerO(nameO);
-        resetBoard();
-    };
 
     return {
         board,
         xIsNext,
-        playerX,
-        playerO,
+        playerX, setPlayerX,
+        playerO, setPlayerO,
         winnerSymbol,
         winnerName,
         isDraw,
-        handlePlay,
-        resetBoard,
-        startGame
+        applyMove,
+        resetBoard
     };
 };

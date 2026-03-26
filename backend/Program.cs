@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicTacToe.Api.Data.Context;
+using TicTacToe.Api.Hubs;
 using TicTacToe.Api.Services;
 using TicTacToe.Api.Services.Interfaces;
 
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 // Configura o Swagger (Documentação da API)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSignalR();
 
 // Configura o Entity Framework Core para usar o PostgreSQL
 builder.Services.AddDbContext<TicTacToeDbContext>(options =>
@@ -22,12 +25,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // A URL exata do seu Vite
+        policy.WithOrigins("http://localhost:5173")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
-
 var app = builder.Build();
 
 // ==============================================================================
@@ -48,5 +51,7 @@ app.UseCors("AllowFrontend");
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<MatchHub>("/matchHub");
 
 app.Run();
