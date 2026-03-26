@@ -119,9 +119,9 @@ Caso você queira testar a versão inicial do projeto, onde a partida acontece l
 
 Para acessar e rodar essa versão:
 
-### 1. No terminal, antes da execução do front-end ou da API mude para a branch `offline`:
+### 1. No terminal, antes da execução do front-end ou da API mude para a branch `offline-version`:
 ```bash
-git checkout offline
+git checkout offline-version
 ```
 
 ### 2. Com a API e o front-end rodando, acesse a URL gerada pelo Vite (geralmente http://localhost:5173) no seu navegador.
